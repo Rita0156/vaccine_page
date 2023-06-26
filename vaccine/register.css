@@ -1,0 +1,43 @@
+#register{
+    width: 40%;
+    margin: auto;
+    background-color: blue;
+    color: white;
+    padding: 50px;
+}
+input{
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+#radio{
+    display: flex;
+    width: 30%;
+    margin: auto;
+    font-size: 20px;
+}
+#selec{
+    width: 40%;
+    font-size: 20px;
+}
+select{
+    font-size: 20px;
+}#sub{
+    width: 20%;
+    margin: auto;
+}
+#links{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+    border: 3px solid black;
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vaccinated</title>
+    <style>
+           #links{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+    border: 3px solid black;
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+        #selec{
+    width: 40%;
+    font-size: 20px;
+}
+select{
+    font-size: 20px;
+}
+    </style>
+</head>
+<body>
+    <div id="links">
+        <a href="index.html">Home</a>
+        <a href="dash.html">Dashboard</a>
+        <a href="vaccine.html">Vaccineted</a>
+    </div>
+    <div id="selec">
+        <select name="Priority" id="priority">
+            <option value="p0">p0</option>
+             <option value="p1">p1</option>
+              <option value="p2">p2</option>
+               <option value="p3">p3</option>
+        </select>
+            <select name="Vaccine" id="vaccine" value="vaccine">
+            <option value="Covishield">Covishield</option>
+             <option value="Covaxin">Covaxin</option>
+              <option value="Sputnik">Sputnik</option>
+               
+        </select>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>priority</th>
+                <th>Vaccine</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+    let vaccine=document.getElementById("vaccine")
+    let priority=document.getElementById("priority")
+    let tbody=document.querySelector("tbody")
+    let vac=JSON.parse(localStorage.getItem("vaccinated"))||[]
+    display(vac)
+
+    vaccine.addEventListener("change",()=>{
+    let prio= vac.filter((element)=>{
+      if(element.vaccine==vaccine.value){
+        return true
+      }
+    })
+    display(prio)
+   })
+   priority.addEventListener("change",()=>{
+    let prio= vac.filter((element)=>{
+      if(element.priority==priority.value){
+        return true
+      }
+    })
+    display(prio)
+   })
+
+   function display(data){
+    tbody.innerHTML=null
+        data.forEach((element,i) => {
+            let tr=document.createElement("tr")
+            let td1=document.createElement("td")
+            td1.innerText=element.id
+            let td2=document.createElement("td")
+            td2.innerText=element.name
+            let td3=document.createElement("td")
+            td3.innerText=element.age
+            let td4=document.createElement("td")
+            td4.innerText=element.priority
+            let td5=document.createElement("td")
+            td5.innerText=element.vaccine
+            
+
+            tr.append(td1,td2,td3,td4,td5)
+            tbody.append(tr)
+        });
+    }
+</script>

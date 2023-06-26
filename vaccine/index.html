@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div id="links">
+        <a href="index.html">Home</a>
+        <a href="dash.html">Dashboard</a>
+        <a href="vaccine.html">Vaccineted</a>
+    </div>
+    <h1 style="text-align: center;">Vaccine Registration Form</h1>
+    
+    <form id="register">
+        <input type="text" placeholder="Enter uniq id" id="ID"><br>
+        <input type="text" placeholder="Enter your name" id="name"><br>
+        <input type="text" placeholder="Enter your age" id="age"><br>
+
+        <div id="radio">
+            <input type="radio" name="Designation " id="student">Student
+           <input type="radio" name="Designation " id="employee">Employee
+        </div>
+        <br>
+        <div id="selec">
+            <select name="Priority" id="priority">
+                <option value="p0">p0</option>
+                 <option value="p1">p1</option>
+                  <option value="p2">p2</option>
+                   <option value="p3">p3</option>
+            </select>
+                <select name="Vaccine" id="vaccine" value="vaccine">
+                <option value="Covishield">Covishield</option>
+                 <option value="Covaxin">Covaxin</option>
+                  <option value="Sputnik">Sputnik</option>
+                   
+            </select>
+        </div>
+        <br>
+       
+        <p>For confirm registration click on submit buttot</p>
+        <input type="submit" value="submit">
+       
+    </form> 
+
+</body>
+</html>
+
+<script type="module" src="register.js"></script>

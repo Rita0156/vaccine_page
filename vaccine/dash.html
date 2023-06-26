@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #links{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+    border: 3px solid black;
+    padding: 20px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+#selec{
+    width: 40%;
+    font-size: 20px;
+}
+select{
+    font-size: 20px;
+}
+    </style>
+</head>
+<body>
+    <div id="links">
+        <a href="index.html">Home</a>
+        <a href="dash.html">Dashboard</a>
+        <a href="vaccine.html">Vaccineted</a>
+    </div>
+    <div id="selec">
+        <select name="Priority" id="priority">
+            <option value="">Select Priority</option>
+            <option value="p0">p0</option>
+             <option value="p1">p1</option>
+              <option value="p2">p2</option>
+               <option value="p3">p3</option>
+        </select>
+            <select name="Vaccine" id="vaccine" value="vaccine">
+                <option value="">Select Vaccine Name</option>
+            <option value="Covishield">Covishield</option>
+             <option value="Covaxin">Covaxin</option>
+              <option value="Sputnik">Sputnik</option>
+               
+        </select>
+    </div>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>priority</th>
+                <th>Vaccine</th>
+                <th>OTP</th>
+                <th>Delete</th>
+                <th>Vaccineted</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+    let vaccine=document.getElementById("vaccine")
+    let priority=document.getElementById("priority")
+    let lsdata=JSON.parse(localStorage.getItem("registerf"))||[]
+    let tbody=document.querySelector("tbody")
+    let vac=JSON.parse(localStorage.getItem("vaccinated"))||[]
+    display(lsdata)
+
+   vaccine.addEventListener("change",()=>{
+    let prio= lsdata.filter((element)=>{
+        if(vaccine.value==""){
+            return display(lsdata)
+        }
+      else if(element.vaccine==vaccine.value){
+        return true
+      }
+    })
+    display(prio)
+   })
+   priority.addEventListener("change",()=>{
+    let prio= lsdata.filter((element)=>{
+        if(priority.value==""){
+            return display(lsdata)
+        }
+      else if(element.priority==priority.value){
+        return true
+      }
+    })
+    display(prio)
+   })
+    function display(data){
+        tbody.innerHTML=null
+        data.forEach((element,i) => {
+            let tr=document.createElement("tr")
+            let td1=document.createElement("td")
+            td1.innerText=element.id
+            let td2=document.createElement("td")
+            td2.innerText=element.name
+            let td3=document.createElement("td")
+            td3.innerText=element.age
+            let td4=document.createElement("td")
+            td4.innerText=element.priority
+            let td5=document.createElement("td")
+            td5.innerText=element.vaccine
+            let td6=document.createElement("td")
+            td6.innerText="delete"
+            td6.style.color="red"
+            let td7=document.createElement("td")
+            td7.innerText="vaccineted"
+            td7.style.color="green"
+            td8=document.createElement("td")
+            td8.innerText=element.otp
+            tr.append(td1,td2,td3,td4,td5,td8,td6,td7)
+            tbody.append(tr)
+            td6.addEventListener("click",()=>{
+                lsdata=lsdata.filter((ele,ind)=>{
+                    if(i!==ind){
+                       return true
+                    }
+                })
+                display(lsdata)
+                localStorage.setItem("registerf",JSON.stringify(lsdata))
+            })
+            td7.addEventListener("click",()=>{
+                
+                let veryfyotp=prompt("Enter OTP")
+                if(element.otp==veryfyotp){
+                    alert(`${element.name} Added to Queue`)
+                    setTimeout(function(){
+                        alert(`Vaccinating ${element.vaccine}`)
+                    },5000)
+                    setTimeout(function(){
+                        alert(`${element.name} Vaccinated`)
+                    },15000)
+                    vac.push(element)
+                   localStorage.setItem("vaccinated",JSON.stringify(vac))
+
+                
+                lsdata=lsdata.filter((ele,ind)=>{
+                    if(i!==ind){
+                       return true
+                    }
+                })
+                display(lsdata)
+                localStorage.setItem("registerf",JSON.stringify(lsdata))
+            }else{
+                alert("OTP is incorrect")
+            }
+            })
+        
+
+           
+        });
+    }
+    //dashboard page
+</script>
